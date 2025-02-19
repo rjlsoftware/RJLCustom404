@@ -1,6 +1,8 @@
 ![RJLCodes](https://rjl.codes/img/logo.webp)
 # RJLCustom404
-RJLCustom404 was a project created for **simple** creation of 404 error handling pages. Offloading the html, css and images to create a simple 404 handler. You can find out more at [RJL.codes](https://rjl.codes/)
+RJLCustom404 was a project created for **simple** creation of 404 error handling pages. Offloading the html, css and images to create a simple 404 handler.
+
+An interactive page where you can see how your confiruation changes the 404 page in real-time can be found at [RJL.codes](https://rjl.codes/)
 
 ## Description
 
@@ -49,7 +51,7 @@ Edit the 404.htm file and add the following code
 |---|---|---|---|
 | `pageTitle` | `string` | `"404 - Not Found"` | Value of the HTML Page Title |
 | `bodyBackgroundColor` | `string` | `"white"` | `body` color, essentially the background color |
-| `bodyFontColor` | `string` | `#0969DA` `"black"` | Font color |
+| `bodyFontColor` | `string` | `"black"` | Font color |
 | `automatic404Image` | `boolean` | `false` | `true` will automatically display one of our 404 images `false` requires you to define the 404 images |
 | `imgFileNames` | `array` | `["/errors/404-1.webp", "/errors/404-2.webp", "/errors/404-3.webp"]` | Array of images to be loaded from your website in the format of ["YOUR_DOT_COM/PATH/FILE_NAME.EXTENSION"] |
 | `imgBoxShadow` | `boolean` | `false` | Display a shadow around the image |
@@ -64,3 +66,8 @@ Edit the 404.htm file and add the following code
 | `headerText` | `string` | `"404 - File not found"` | Text that appears with the image `h3` |  |
 | `subHeaderText` | `string` | `""` | Text that appears under the Header Text `p` |
 | `headerTextPosition` | `string` | `"top"` | `top` displays text above the image `left` displays text to the left of image `right` displays text to the right of the image |
+
+## Project Assistance
+This project is tested with BrowserStack  [https://www.browserstack.com/](https://www.browserstack.com/)
+
+## End
