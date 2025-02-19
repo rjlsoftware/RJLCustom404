@@ -30,16 +30,20 @@ EXAMPLE with all options:
 
 (function () {
 
-    // Maximum number of default images
+    //Domain and Path automatic images are coming from
+    const AUTO_IMAGES_DOMAIN_PATH = "https://rjl.codes/error/404/images/";
+    // Maximum number of default images in ^^^ folder
     const MAX_404_IMAGES = 123;
 
     // Dynamically generate the default image array
     const defaultImageArray = Array.from({ length: MAX_404_IMAGES }, (_, i) =>
-         `https://rjl.codes/error/404/images/${i + 1}.webp`
+         `${AUTO_IMAGES_DOMAIN_PATH}${i + 1}.webp`
     );
 
     // A working copy of defaultImageArray that will be shuffled and used
     let shuffledImageArray = [...defaultImageArray];
+    // A working copy of user-defined images (shuffled)
+    let shuffledUserImages = [];
 
     // Function to shuffle an array (Fisher-Yates Algorithm)
     function shuffleArray(array) {
@@ -60,6 +64,16 @@ EXAMPLE with all options:
             shuffleArray(shuffledImageArray);
         }
         return shuffledImageArray.pop(); // Remove and return the last image in the shuffled array
+    }
+
+    // Function to get a unique random image from user-defined list
+    function getUniqueUserImage() {
+        if (shuffledUserImages.length === 0) {
+            // If all user images have been used, reset and shuffle
+            shuffledUserImages = [...getParam(globalOptions.imgFileNames, defaults.imgFileNames)];
+            shuffleArray(shuffledUserImages);
+        }
+        return shuffledUserImages.pop(); // Remove and return the last image
     }
 
     //disable right-clicking on the entire page
@@ -101,16 +115,13 @@ EXAMPLE with all options:
     let globalOptions = {}; // Store options for later use
     let rjlImageElement = null; // Store the image element
 
-    // Function to select a random image from the appropriate array
+    // Function to select an image, ensuring uniqueness if using automatic404Image
     function getRandomImage() {
         if (getParam(globalOptions.automatic404Image, defaults.automatic404Image)) {
-            // Use default image array when automatic404Image is true
-            //return defaultImageArray[Math.floor(Math.random() * defaultImageArray.length)];
-            return getUniqueRandomImage(); // Unique image from shuffled list
+            return getUniqueRandomImage(); // Unique image from default 404 images
+        } else {
+            return getUniqueUserImage(); // Unique image from user-defined list
         }
-        // Otherwise, use user-provided images
-        const userImages = getParam(globalOptions.imgFileNames, defaults.imgFileNames);
-        return userImages[Math.floor(Math.random() * userImages.length)];
     }
 
     // Function to set page title
@@ -204,18 +215,16 @@ EXAMPLE with all options:
         // Apply watermark text
         ctx.font = "20px Arial";
         ctx.fillStyle = "rgba(255, 255, 255, 0.7)"; // White with transparency
-        // ctx.textAlign = "right";
-        // ctx.fillText(watermarkText, canvas.width - 100, canvas.height - 15);
 
-ctx.textAlign = "center"; // Center horizontally
-    ctx.textBaseline = "bottom"; // Align text from the bottom
+        ctx.textAlign = "center"; // Center horizontally
+        ctx.textBaseline = "bottom"; // Align text from the bottom
 
-    // Calculate position: center horizontally, 15px from the bottom
-    const centerX = canvas.width / 2;
-    const bottomY = canvas.height - 5; // 15 pixels from the bottom
+        // Calculate position: center horizontally, 15px from the bottom
+        const centerX = canvas.width / 2;
+        const bottomY = canvas.height - 5; // 15 pixels from the bottom
 
-    // Draw the text
-    ctx.fillText(watermarkText, centerX, bottomY);
+        // Draw the text
+        ctx.fillText(watermarkText, centerX, bottomY);
 
         // Return the watermarked image as a data URL
         return canvas.toDataURL("image/png");
@@ -333,11 +342,35 @@ ctx.textAlign = "center"; // Center horizontally
         imgLink.id = "goHomeLink";
         imgLink.title = `Go to ${window.location.hostname}`;
 
-        //imgLink.appendChild(addWatermarkToImage(getRandomImage(), "© rjl.codes"));
-        // Fetch and add the image asynchronously
-        addWatermarkToImage(getRandomImage(), "© rjl.codes", function (watermarkedImg) {
-            imgLink.appendChild(watermarkedImg);
-        });
+        const imgSrc = getRandomImage();
+        if (getParam(options.automatic404Image, defaults.automatic404Image)) {
+            // Apply watermark only if automatic404Image=true
+            addWatermarkToImage(imgSrc, "© rjl.codes", function (watermarkedImg) {
+                imgLink.appendChild(watermarkedImg);
+            });
+        } else {
+            // No watermark for custom images
+            const img = document.createElement("img");
+            img.src = imgSrc;
+            img.alt = "404 Error";
+            img.className = "custom404-img";
+            img.style.maxWidth = "100%";
+            img.style.height = "auto";
+            img.style.margin = "35px 35px 0px 35px";
+            img.style.display = "block";
+            img.style.borderRadius = getParam(options.imgBorderRadius, defaults.imgBorderRadius);
+
+            // Prevent dragging
+            img.ondragstart = function () { return false; };
+            img.style.webkitUserSelect = "none";
+            img.style.mozUserSelect = "none";
+            img.style.msUserSelect = "none";
+            img.style.userSelect = "none";
+
+            rjlImageElement = img;
+
+            imgLink.appendChild(img);
+        }
 
         // Append elements based on position
         if (options.headerTextPosition === "top") {
@@ -365,16 +398,17 @@ ctx.textAlign = "center"; // Center horizontally
     window.RJLCustom404.refreshImage = function () {
         if (rjlImageElement) {
             const newSrc = getRandomImage();
-
             // Remove previous onload event to prevent multiple calls
             rjlImageElement.onload = null;
 
             // Set the new image source
             rjlImageElement.src = newSrc;
 
-            // Apply watermark AFTER the new image is fully loaded
-            rjlImageElement.onload = function () {
-                applyWatermark(rjlImageElement, "© rjl.codes");
+            if (globalOptions.automatic404Image) {
+                // Apply watermark AFTER the new image is fully loaded
+                rjlImageElement.onload = function () {
+                    applyWatermark(rjlImageElement, "© rjl.codes");
+                };
             };
         }
     };

@@ -1,14 +1,54 @@
 ![RJLCodes](https://rjl.codes/img/logo.webp)
-# RJLCustom404
-RJLCustom404 was a project created for **simple** creation of 404 error handling pages. Offloading the html, css and images to create a simple 404 handler.
+# :rocket: RJLCustom404.js
+An interactive page where you can see how your configuration changes the 404 page in real-time can be found at [RJL.codes](https://rjl.codes/)
 
-An interactive page where you can see how your confiruation changes the 404 page in real-time can be found at [RJL.codes](https://rjl.codes/)
+### :pushpin: Overview
+RJLCustom404 is a lightweight and dynamic **404 error page generator** that allows users to customize error page content, styles, and images effortlessly. It supports **randomized images**, dynamic text, button options, and easy integration into any website. If you are an expert in html/css and love to be creative, this project is not for you. This is for developers who want a quick easy way to create 404 pages.
 
-## Description
+### :sparkles: Features
+- **Dynamic 404 Images**: Use custom image lists or enable `automatic404Image` to randomize from a preset collection.
+- **Fully Customizable**: Modify background, text, buttons, and image styles.
+- **Automatic Image Rotation**: Ensures a unique 404 image each time.
+- **One-Click Image Refresh**: Provides a built-in method to refresh images dynamically while previewing.
+- **Lightweight & Standalone**: No dependencies—just include the script.
 
-If you are an expert in html/css and love to create creative 404 pages, this project is not for you. This is for developers who want a quick easy way to create 404 pages.
+## :boom: Basic Usages
+```
+<script src="custom404.js?v=0.0.1"></script>
+<script>
+  RJLCustom404({
+    //No options uses defaults
+  });
+</script>
+```
 
-## Getting Started
+or with some options
+
+```
+<script src="custom404.js?v=0.0.1"></script>
+<script>
+    RJLCustom404({
+        pageTitle: "Hope Not Found",   // Custom Page Title
+        bodyBackgroundColor: "#fff",   // Default body background color
+        bodyFontColor: "black",        // Default font color
+
+        automatic404Image: true,       // Automatically generate 404 images
+        imgBorderRadius: "10%",        // Custom border radius
+        imgBoxShadow: false,           // Disables the image shadow.
+
+        actionIsBtn: false,           // Add action as plain text <a href>
+        btnDisplayText: "Go back to ",// Text of action link (or button)
+        btnDisplayHostName: true,     // Display the hostname after Display Text
+
+        headerText: "You seem to be lost", // Custom header text
+        headerTextPosition: "left",        // "top", "left", or "right"
+        subHeaderText: "Try again..."      // Sub header text
+    });
+</script>
+```
+
+
+## :triangular_flag_on_post: Getting Started
 
 This javascript library does not care what http server you use to load your website. You just need to create a custom 404 handler on your domain. In this simple example I am using IIS that is handling one web site.
 
@@ -24,27 +64,9 @@ IIS uses a file called web.config. In this simple example you will want to creat
     </system.webServer>
 </configuration>
 ```
-In this section **path="/errors/404.htm"** meaning on the root of the server, in a folder called /errors/ there is a static html file called 404.htm (this can be called whatever you want). Create this empty 404.htm file.
-Edit the 404.htm file and add the following code
-```
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
-</head>
-<body>
-<script>
-  RJLCustom404({
-    //Your custom options here
-  });
-</script>
-</body>
-</html>
-```
+In this section **path="/errors/404.htm"** meaning on the root of the server, in a folder called /errors/ there is a static html file called 404.htm (this can be called whatever you want). You can use the 404.htm file in this repository to start.
 
-## Options
+## :wrench: Options
 :art: All color options support rgb(255, 255, 255), HEX #333 short code, HEX #f8f8f8 long code, hsl(9, 100%, 64%), or the actual color name "blue".
 
 | Option | Type | Default | Description |
@@ -67,7 +89,11 @@ Edit the 404.htm file and add the following code
 | `subHeaderText` | `string` | `""` | Text that appears under the Header Text `p` |
 | `headerTextPosition` | `string` | `"top"` | `top` displays text above the image `left` displays text to the left of image `right` displays text to the right of the image |
 
-## Project Assistance
+## :question: More Information
+
+An interactive page where you can see how your confiruation changes the 404 page in real-time can be found at [RJL.codes](https://rjl.codes/)
+
+## :raising_hand: Project Assistance
 This project is tested with BrowserStack  [https://www.browserstack.com/](https://www.browserstack.com/)
 
-## End
+## :+1: End
