@@ -12,7 +12,7 @@ RJLCustom404 is a lightweight and dynamic **404 error page generator** that allo
 - **One-Click Image Refresh**: Provides a built-in method to refresh images dynamically while previewing.
 - **Lightweight & Standalone**: No dependencies—just include the script.
 
-## :boom: Basic Usages
+### :boom: Basic Usages
 ```
 <script src="custom404.js?v=0.0.1"></script>
 <script>
@@ -47,25 +47,6 @@ or with some options
 </script>
 ```
 
-
-## :triangular_flag_on_post: Getting Started
-
-This javascript library does not care what http server you use to load your website. You just need to create a custom 404 handler on your domain. In this simple example I am using IIS that is handling one web site.
-
-IIS uses a file called web.config. In this simple example you will want to create the web.config file at the root / of your website. The specific structure you want to focus on is the **httpErrors** section.
-```
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-    <system.webServer>
-        <httpErrors errorMode="Custom">
-            <remove statusCode="404" subStatusCode="-1" />
-            <error statusCode="404" prefixLanguageFilePath="" path="/errors/404.htm" responseMode="ExecuteURL" />
-        </httpErrors>
-    </system.webServer>
-</configuration>
-```
-In this section **path="/errors/404.htm"** meaning on the root of the server, in a folder called /errors/ there is a static html file called 404.htm (this can be called whatever you want). You can use the 404.htm file in this repository to start.
-
 ## :wrench: Options
 :art: All color options support rgb(255, 255, 255), HEX #333 short code, HEX #f8f8f8 long code, hsl(9, 100%, 64%), or the actual color name "blue".
 
@@ -89,11 +70,37 @@ In this section **path="/errors/404.htm"** meaning on the root of the server, in
 | `subHeaderText` | `string` | `""` | Text that appears under the Header Text `p` |
 | `headerTextPosition` | `string` | `"top"` | `top` displays text above the image `left` displays text to the left of image `right` displays text to the right of the image |
 
+
+## :triangular_flag_on_post: 404 Page Handling - Getting Started
+
+This javascript library does not care what http server you use to load your website. You just need to create a custom 404 handler on your domain. In this simple example I am using IIS that is handling one web site.
+
+ **- Apache Example**
+While in the root directory, open the .htaccess file (or create one if missing). In the .htaccess file, add the record ‘ErrorDocument 404 /404.htm’.
+
+ **- IIS Example**
+Via the IIS Services Manager, go to the "Error Pages" section and add a new error page with status code "404" and specify the path to your custom 404.htm page.
+
+IIS uses a file called web.config. You can also create the web.config file at the root / of your website. The specific structure you want to focus on is the **httpErrors** section.
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <system.webServer>
+        <httpErrors errorMode="Custom">
+            <remove statusCode="404" subStatusCode="-1" />
+            <error statusCode="404" prefixLanguageFilePath="" path="/errors/404.htm" responseMode="ExecuteURL" />
+        </httpErrors>
+    </system.webServer>
+</configuration>
+```
+In this section **path="/errors/404.htm"** meaning on the root of the server, in a folder called /errors/ there is a static html file called 404.htm (this can be called whatever you want). You can use the 404.htm file in this repository to start.
+
 ## :question: More Information
 
 An interactive page where you can see how your confiruation changes the 404 page in real-time can be found at [RJL.codes](https://rjl.codes/)
 
+## :+1: Best Practices
+A 404 page is still a 404 page, so you should **not** set up a redirect for 404 pages. You shouldn’t redirect users to an irrelevant page, such as the homepage. For SEO it is not a great practice (confuses users), and search engines mostly treat them as 404s anyway (they're soft-404s), so there's no upside. It's not critically broken/bad, but additional complexity for no good reason - make a better 404 page instead.
+
 ## :raising_hand: Project Assistance
 This project is tested with BrowserStack  [https://www.browserstack.com/](https://www.browserstack.com/)
-
-## :+1: End
