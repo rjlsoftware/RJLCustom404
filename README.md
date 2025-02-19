@@ -59,7 +59,7 @@ or with some options
 | `imgFileNames` | `array` | `["/errors/404-1.webp", "/errors/404-2.webp", "/errors/404-3.webp"]` | Array of images to be loaded from your website in the format of ["YOUR_DOT_COM/PATH/FILE_NAME.EXTENSION"] |
 | `imgBoxShadow` | `boolean` | `false` | Display a shadow around the image |
 | `imgBoxShadowSize` | `string` | `"5px"` | Size in pixels of shadow |
-| `imgBoxShadowColor` | `string` | `"rgba(255, 255, 255, 1)"` | Shadow color, including Opacity (1=100%, 0.5=50%) |
+| `imgBoxShadowColor` | `string` | `"rgba(18, 0, 100, .4)"` | Shadow color, including Opacity (1=100%, 0.5=50%) |
 | `btnColor` | `string` | `"blue"` | Color of the action button to users |
 | `btnDisplayText` | `string` | `"Back to"` | Text action button |
 | `btnDisplayHostName` | `boolean` | `true` | Display the hostname after Display Text |
