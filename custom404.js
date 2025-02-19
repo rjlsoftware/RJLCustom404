@@ -1,33 +1,3 @@
-/*
-EXAMPLE with all options:
-
-<script>
-    RJLCustom404({
-        pageTitle: "File Not Found",   // Custom Page Title
-        bodyBackgroundColor: "#fff",  // Default body background color
-        bodyFontColor: "#000",        // Default font color
-
-        imgBorderRadius: "10%",        // Custom border radius
-        imgFileNames: ["/errors/404.webp", "/errors/404-2.webp", "/errors/404-3.webp"], // Custom images
-        automatic404Image: false, // Automatically display one of our 404 images
-        imgBoxShadow: false, // Enables or disables the shadow.
-        imgBoxShadowSize: "5px", // Controls shadow size.
-        imgBoxShadowColor: "rgba(101, 179, 230, 1)", //Custom shadow color.
-
-        btnColor: "blue",           // Button color
-        btnPulsate: true,           // Enable pulsation
-        btnPulsateCount: 2,         // Pulsate x times
-        btnDisplayText: "asdf",     // Text to display on the button
-        btnDisplayHostName: false,  // Show the hostname after the displayText
-        actionIsBtn: true,          // Is it a <btn> tag or simple plain text <a href>
-
-        headerText: "I found something", // Custom header text
-        headerTextPosition: "left",  // "top", "left", or "right"
-        subHeaderText: "Problably not what you wanted..." // Sub header text
-    });
-</script>
-*/
-
 (function () {
 
     //Domain and Path automatic images are coming from
@@ -101,7 +71,7 @@ EXAMPLE with all options:
         actionIsBtn: true, // Use <button> (true) or plain <a> text (false)
         imgBoxShadow: false, // Enable box shadow on hover
         imgBoxShadowSize: "5px", // Default shadow size
-        imgBoxShadowColor: "rgba(255, 255, 255, 1)", // Default shadow color
+        imgBoxShadowColor: "rgba(18, 0, 100, .4)", // Default shadow color
         bodyBackgroundColor: "white", // New: Default body background color
         bodyFontColor: "black" // New: Default body font color
     };
@@ -152,8 +122,7 @@ EXAMPLE with all options:
 
             ${getParam(options.imgBoxShadow, defaults.imgBoxShadow) ? `
             .custom404-img:hover {
-                box-shadow: 0 ${getParam(options.imgBoxShadowSize, defaults.imgBoxShadowSize)}
-                            25px 8px ${getParam(options.imgBoxShadowColor, defaults.imgBoxShadowColor)};
+                box-shadow: 0 0 25px ${getParam(options.imgBoxShadowSize, defaults.imgBoxShadowSize)} ${getParam(options.imgBoxShadowColor, defaults.imgBoxShadowColor)};
                 transform: scale(1.08);
             }` : ""}
         `;
