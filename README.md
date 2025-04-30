@@ -1,3 +1,4 @@
+
 ![RJLCodes](https://rjl.codes/img/logo.webp)
 # :rocket: RJLCustom404.js
 An interactive page where you can see how your configuration changes the 404 page in real-time can be found at [RJL.codes](https://rjl.codes/)
@@ -69,7 +70,8 @@ or with some options
 | `headerText` | `string` | `"404 - File not found"` | Text that appears with the image `h3` |  |
 | `subHeaderText` | `string` | `""` | Text that appears under the Header Text `p` |
 | `headerTextPosition` | `string` | `"top"` | `top` displays text above the image `left` displays text to the left of image `right` displays text to the right of the image |
-
+| `maxImgWidth` | `string` | `1000px` | Max image width |
+| `imgResponsiveBreakpoints` | `boolean` | `true` | Enable responsive breakpoints |
 
 ## :triangular_flag_on_post: 404 Page Handling - Getting Started
 

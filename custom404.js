@@ -73,7 +73,9 @@
         imgBoxShadowSize: "5px", // Default shadow size
         imgBoxShadowColor: "rgba(18, 0, 100, .4)", // Default shadow color
         bodyBackgroundColor: "white", // New: Default body background color
-        bodyFontColor: "black" // New: Default body font color
+        bodyFontColor: "black", // Default body font color
+        maxImgWidth: "1000px", // Maximum image width
+        imgResponsiveBreakpoints: true // Enable responsive breakpoints
     };
 
     // Function to get parameter or fallback to default
@@ -103,9 +105,13 @@
     function applyBodyStyles(options) {
         document.body.style.backgroundColor = getParam(options.bodyBackgroundColor, defaults.bodyBackgroundColor);
         document.body.style.color = getParam(options.bodyFontColor, defaults.bodyFontColor);
+        document.body.style.margin = "0";
+        document.body.style.padding = "0";
+        document.body.style.width = "100%";
+        document.body.style.boxSizing = "border-box";
     }
 
-    // Function to inject CSS (for hover effects)
+    // Function to inject CSS (for hover effects and responsive styles)
     function injectCSS(options) {
         const style = document.createElement("style");
         style.innerHTML = `
@@ -115,9 +121,51 @@
                 100% { transform: scale(1); }
             }
 
+            * {
+                box-sizing: border-box;
+            }
+
+            .custom404-container {
+                width: 100%;
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .custom404-text-container {
+                width: 100%;
+                max-width: 1000px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .custom404-img-container {
+                width: 100%;
+                max-width: ${getParam(options.maxImgWidth, defaults.maxImgWidth)};
+                margin: 0 auto;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
             .custom404-img {
+                width: 100%;
+                height: auto;
                 transform: scale(1.05);
                 transition: box-shadow 0.3s ease, transform 0.3s ease;
+                display: block;
+                margin: 20px auto;
             }
 
             ${getParam(options.imgBoxShadow, defaults.imgBoxShadow) ? `
@@ -125,6 +173,72 @@
                 box-shadow: 0 0 25px ${getParam(options.imgBoxShadowSize, defaults.imgBoxShadowSize)} ${getParam(options.imgBoxShadowColor, defaults.imgBoxShadowColor)};
                 transform: scale(1.08);
             }` : ""}
+
+            .custom404-header {
+                font-size: 2em;
+                margin: 10px 0;
+            }
+
+            .custom404-subheader {
+                font-size: 1.2em;
+                margin: 5px 0;
+            }
+
+            .custom404-button {
+                background-color: ${getParam(options.btnColor, defaults.btnColor)};
+                color: white;
+                padding: 15px 30px;
+                font-size: 1.2em;
+                border: none;
+                cursor: pointer;
+                margin-top: 5px;
+                border-radius: 10px;
+            }
+
+            /* Responsive breakpoints */
+            @media screen and (max-width: 768px) {
+                .custom404-header {
+                    font-size: 1.8em;
+                }
+
+                .custom404-subheader {
+                    font-size: 1.1em;
+                }
+
+                .custom404-button {
+                    padding: 12px 24px;
+                    font-size: 1.1em;
+                }
+
+                .custom404-img {
+                    margin: 15px auto;
+                }
+            }
+
+            @media screen and (max-width: 480px) {
+                .custom404-header {
+                    font-size: 1.5em;
+                }
+
+                .custom404-subheader {
+                    font-size: 1em;
+                }
+
+                .custom404-button {
+                    padding: 10px 20px;
+                    font-size: 1em;
+                    width: 100%;
+                    max-width: 250px;
+                }
+
+                .custom404-img {
+                    margin: 10px auto;
+                }
+
+                .custom404-container {
+                    padding: 10px;
+                }
+            }
         `;
         document.head.appendChild(style);
     }
@@ -141,14 +255,7 @@
             button.innerText = buttonText;
             button.title = `Go to ${window.location.hostname}`;
             button.onclick = () => window.location.href = "/";
-            button.style.backgroundColor = getParam(options.btnColor, defaults.btnColor);
-            button.style.color = "white";
-            button.style.padding = "15px 30px";
-            button.style.fontSize = "1.2em";
-            button.style.border = "none";
-            button.style.cursor = "pointer";
-            button.style.marginTop = "5px";
-            button.style.borderRadius = "10px";
+            button.className = "custom404-button";
 
             // Apply pulsating effect if enabled
             if (getParam(options.btnPulsate, defaults.btnPulsate)) {
@@ -215,7 +322,6 @@
         };
     }
 
-
     // used in outputting img code
     function addWatermarkToImage(imgSrc, watermarkText, callback) {
         const img = new Image();
@@ -231,10 +337,6 @@
             watermarkedImg.src = watermarkedSrc;
             watermarkedImg.alt = "404 Error";
             watermarkedImg.className = "custom404-img";
-            watermarkedImg.style.maxWidth = "100%";
-            watermarkedImg.style.height = "auto";
-            watermarkedImg.style.margin = "35px 35px 0px 35px";
-            watermarkedImg.style.display = "block";
             watermarkedImg.style.borderRadius = getParam(globalOptions.imgBorderRadius, defaults.imgBorderRadius);
 
             // Prevent dragging
@@ -254,12 +356,13 @@
         };
     }
 
-
     // Function to inject HTML
     function injectHTML(options) {
+        // Create main container
         const container = document.createElement("div");
-        container.style.textAlign = "center";
-        container.style.fontFamily = "Arial, sans-serif";
+        container.className = "custom404-container";
+
+        // Set display flex direction based on header position
         container.style.display = "flex";
         container.style.flexDirection = options.headerTextPosition === "top" ? "column" : "row";
         container.style.alignItems = "center";
@@ -272,6 +375,7 @@
 
         // Create a wrapper for text elements
         const textContainer = document.createElement("div");
+        textContainer.className = "custom404-text-container";
         textContainer.style.display = "flex";
         textContainer.style.flexDirection = "column";
         textContainer.style.alignItems = "center";
@@ -279,18 +383,17 @@
 
         // Inject header
         const header = document.createElement("h3");
+        header.className = "custom404-header";
         header.innerText = getParam(options.headerText, defaults.headerText);
-        header.style.fontSize = "2em";
-        header.style.margin = "10px 0";
         textContainer.appendChild(header);
 
         // Inject sub-header if provided
         const subHeaderText = getParam(options.subHeaderText, defaults.subHeaderText);
         if (subHeaderText) {
             const subHeader = document.createElement("p");
+            subHeader.className = "custom404-subheader";
             subHeader.innerText = subHeaderText;
-            subHeader.style.fontSize = "1.2em";
-            subHeader.style.margin = "5px 0";
+
             // Fetch the body font color correctly using getParam()
             const bodyFontColor = getParam(options.bodyFontColor, defaults.bodyFontColor);
             // If font color is black or dark, make subheader text a little lighter
@@ -305,11 +408,17 @@
         // Inject action (button or plain text link)
         textContainer.appendChild(createActionElement(options));
 
+        // Create image container
+        const imgContainer = document.createElement("div");
+        imgContainer.className = "custom404-img-container";
+
         // Inject image with dynamic border-radius
         const imgLink = document.createElement("a");
         imgLink.href = "/";
         imgLink.id = "goHomeLink";
         imgLink.title = `Go to ${window.location.hostname}`;
+        imgLink.style.display = "block";
+        imgLink.style.width = "100%";
 
         const imgSrc = getRandomImage();
         if (getParam(options.automatic404Image, defaults.automatic404Image)) {
@@ -323,10 +432,6 @@
             img.src = imgSrc;
             img.alt = "404 Error";
             img.className = "custom404-img";
-            img.style.maxWidth = "100%";
-            img.style.height = "auto";
-            img.style.margin = "35px 35px 0px 35px";
-            img.style.display = "block";
             img.style.borderRadius = getParam(options.imgBorderRadius, defaults.imgBorderRadius);
 
             // Prevent dragging
@@ -341,17 +446,54 @@
             imgLink.appendChild(img);
         }
 
+        imgContainer.appendChild(imgLink);
+
         // Append elements based on position
         if (options.headerTextPosition === "top") {
             container.appendChild(textContainer);
-            container.appendChild(imgLink);
+            container.appendChild(imgContainer);
         } else {
-            container.appendChild(imgLink);
+            container.appendChild(imgContainer);
             container.appendChild(textContainer);
         }
 
         // Append to body
         document.body.appendChild(container);
+
+        // Add responsive handling for mobile
+        if (getParam(options.imgResponsiveBreakpoints, defaults.imgResponsiveBreakpoints)) {
+            window.addEventListener('resize', function() {
+                handleResponsiveLayout(container, textContainer, imgContainer, options);
+            });
+
+            // Initial call to set correct layout
+            handleResponsiveLayout(container, textContainer, imgContainer, options);
+        }
+    }
+
+    // Function to handle responsive layout changes
+    function handleResponsiveLayout(container, textContainer, imgContainer, options) {
+        const windowWidth = window.innerWidth;
+
+        // Force column layout on mobile regardless of headerTextPosition setting
+        if (windowWidth <= 768 && options.headerTextPosition !== "top") {
+            container.style.flexDirection = "column";
+        } else if (options.headerTextPosition === "left") {
+            container.style.flexDirection = "row-reverse";
+        } else if (options.headerTextPosition === "right") {
+            container.style.flexDirection = "row";
+        }
+
+        // Adjust margins and padding for small screens
+        if (windowWidth <= 480) {
+            container.style.padding = "10px";
+            textContainer.style.marginBottom = "10px";
+            imgContainer.style.marginTop = "10px";
+        } else {
+            container.style.padding = "20px";
+            textContainer.style.marginBottom = "0";
+            imgContainer.style.marginTop = "0";
+        }
     }
 
     // Load script with custom options (if provided)
@@ -381,7 +523,5 @@
             };
         }
     };
-
-
 
 })();
