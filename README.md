@@ -1,5 +1,5 @@
 
-![RJLCodes](https://rjl.codes/img/logo.webp)
+![RJLCodes](https://rjl.codes/img/logo.png)
 # :rocket: RJLCustom404.js
 An interactive page where you can see how your configuration changes the 404 page in real-time can be found at [RJL.codes](https://rjl.codes/)
 
@@ -22,7 +22,7 @@ RJLCustom404 is a lightweight and dynamic **404 error page generator** that allo
   RJLCustom404({
     // Minimal usage. Provide imgFileNames (your own images) or you'll
     // see a [[ No 404 image configured ]] placeholder - the library hosts none.
-    imgFileNames: ["/errors/1.webp", "/errors/2.webp"]
+    imgFileNames: ["/errors/1.png", "/errors/2.png"]
   });
 </script>
 ```
@@ -37,7 +37,7 @@ or with some options
         bodyBackgroundColor: "#fff",   // Default body background color
         bodyFontColor: "black",        // Default font color
 
-        imgFileNames: ["/errors/1.webp", "/errors/2.webp"], // Your own images
+        imgFileNames: ["/errors/1.png", "/errors/2.png"], // Your own images
         imgBorderRadius: "10%",        // Custom border radius
         imgBoxShadow: false,           // Disables the image shadow.
 
@@ -59,8 +59,8 @@ or let the library write the text for you and generate image paths from a patter
 <script>
     RJLCustom404({
         autoText: true,                       // Random title/header/sub-header/button text
-        imgPattern: "/errors/404-{n}.webp",   // Generates /errors/404-1.webp ...
-        imgCount: 10                          // ... through /errors/404-10.webp
+        imgPattern: "/errors/404-{n}.png",    // Generates /errors/404-1.png ...
+        imgCount: 10                          // ... through /errors/404-10.png
     });
 </script>
 ```
@@ -79,8 +79,8 @@ or let the library write the text for you and generate image paths from a patter
 ### Images
 | Option | Type | Default | Description |
 |---|---|---|---|
-| `imgFileNames` | `array` | `[]` (none) | Array of image paths YOU host, e.g. `["/path/a.webp", "/path/b.webp"]`. No bundled/default images. If unset/empty - or if a file fails to load - a `[[ ... ]]` text placeholder is shown in place of the image |
-| `imgPattern` | `string` | `""` (disabled) | Path template for numbered images using a `{n}` placeholder (`{nn}`/`{nnn}` for zero-padding), e.g. `"/errors/404-{n}.webp"`. Requires `imgCount`. Ignored if `imgFileNames` is set |
+| `imgFileNames` | `array` | `[]` (none) | Array of image paths YOU host, e.g. `["/path/a.png", "/path/b.png"]`. No bundled/default images. If unset/empty - or if a file fails to load - a `[[ ... ]]` text placeholder is shown in place of the image |
+| `imgPattern` | `string` | `""` (disabled) | Path template for numbered images using a `{n}` placeholder (`{nn}`/`{nnn}` for zero-padding), e.g. `"/errors/404-{n}.png"`. Requires `imgCount`. Ignored if `imgFileNames` is set |
 | `imgCount` | `number` | `0` (disabled) | How many images to generate from `imgPattern`. Requires `imgPattern` |
 | `imgStartIndex` | `number` | `1` | Starting number for `imgPattern` generation (use `0` for 0-based) |
 | `imgBorderRadius` | `string` | `"50%"` | CSS border-radius applied to the image |
