@@ -140,6 +140,8 @@ In this section **path="/errors/404.htm"** meaning on the root of the server, in
 
 An interactive page where you can see how your configuration changes the 404 page in real-time can be found at [RJL.codes](https://rjl.codes/)
 
+Release history is in [CHANGELOG.md](CHANGELOG.md). Check it before upgrading - 1.2.0 removed the bundled default images, so every site now supplies its own.
+
 ## :+1: Best Practices
 A 404 page is still a 404 page, so you should **not** set up a redirect for 404 pages. You shouldn't redirect users to an irrelevant page, such as the homepage. For SEO it is not a great practice (confuses users), and search engines mostly treat them as 404s anyway (they're soft-404s), so there's no upside. It's not critically broken/bad, but additional complexity for no good reason - make a better 404 page instead.
 
