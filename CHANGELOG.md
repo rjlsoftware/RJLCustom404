@@ -9,6 +9,12 @@ This file was started on 07-27-2026. Releases before that were not tracked here;
 "Earlier history" section at the bottom summarizes them from this repository's commit
 log and carries no version numbers, because none were assigned at the time.
 
+## [1.3.1] - 11-07-2026 at 6:25pm
+
+### Changed
+
+- US English spelling sweep: 1 British spelling in 1 file(s) changed to US forms (`behaviour` -> `behavior`). Comments, docs and page copy only; no behavior change.
+
 ## [1.3.0] - 09-18-2026 at 5:58pm
 
 Every change in this release is backward compatible. A page that worked with 1.2.x renders

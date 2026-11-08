@@ -312,7 +312,7 @@ License, size, CSP, frameworks, self-hosting, privacy and troubleshooting: https
 ## Contributing and issues
 
 Bugs and feature requests: [open an issue](https://github.com/rjlsoftware/RJLCustom404/issues).
-Pull requests are welcome. Changes that could break an existing site are avoided: new behaviour
+Pull requests are welcome. Changes that could break an existing site are avoided: new behavior
 ships as new optional options with backward-compatible defaults, because this file is loaded at
 runtime by sites that never rebuild.
 
