@@ -1,11 +1,11 @@
-/*! RJLCustom404 v1.3.0 | https://rjl.codes | MIT */
+/*! RJLCustom404 v1.3.1 | https://rjl.codes | MIT */
 /*
  * RJLCustom404 - beautiful 404 pages in one line of JavaScript.
  *
  * Renders a complete, responsive 404 page (title, heading, sub-heading, one of
  * YOUR images picked at random, and a way home) from a single call:
  *
- *   <script src="https://rjl.codes/error/404/custom404.js?v=RJL_1.3.0"></script>
+ *   <script src="https://rjl.codes/error/404/custom404.js?v=RJL_1.3.1"></script>
  *   <script>RJLCustom404({ imgFileNames: ["/img/404.png"] });</script>
  *
  * Zero dependencies. No bundled images - host your own. MIT licensed.
@@ -14,7 +14,7 @@
  */
 (function () {
 
-    var LIB_VERSION = "1.3.0";
+    var LIB_VERSION = "1.3.1";
 
     // A working copy of user-defined images (shuffled)
     let shuffledUserImages = [];

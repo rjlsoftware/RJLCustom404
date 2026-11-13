@@ -5,7 +5,7 @@
 <p align="center">
   <a href="https://github.com/rjlsoftware/RJLCustom404/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-004494" alt="License: MIT"></a>
   <img src="https://img.shields.io/badge/dependencies-0-00949e" alt="Zero dependencies">
-  <img src="https://img.shields.io/badge/version-1.3.0-004494" alt="Version">
+  <img src="https://img.shields.io/badge/version-1.3.1-004494" alt="Version">
   <a href="https://rjl.codes/error/404/custom404.js"><img src="https://img.shields.io/badge/hosted-rjl.codes-f7c600" alt="Hosted on rjl.codes"></a>
   <a href="https://rjl.codes/playground/"><img src="https://img.shields.io/badge/try_it-playground-00949e" alt="Playground"></a>
 </p>
@@ -30,7 +30,7 @@ Docs, options reference, live playground and FAQ: **https://rjl.codes/**
 **Hosted (nothing to download)** - paste before `</head>` in your `404.html`:
 
 ```html
-<script src="https://rjl.codes/error/404/custom404.js?v=RJL_1.3.0"></script>
+<script src="https://rjl.codes/error/404/custom404.js?v=RJL_1.3.1"></script>
 <script>RJLCustom404({ imgFileNames: ["/img/404.png"] });</script>
 ```
 
@@ -41,7 +41,7 @@ cache-buster: bump it whenever you want browsers to fetch a fresh copy.
 **Self-hosted** - copy `custom404.min.js` from this repository to your site and reference it instead:
 
 ```html
-<script src="/js/custom404.min.js?v=1.3.0"></script>
+<script src="/js/custom404.min.js?v=1.3.1"></script>
 ```
 
 `custom404.js` is the readable source (with the validation warnings intact); `custom404.min.js` is
@@ -73,7 +73,7 @@ Copy this file, change the image paths, put it at your site root. Done.
   <meta name="robots" content="noindex">
   <title>404 - Page not found</title>
   <!-- No integrity= attribute: the file changes behind a stable URL and a pinned hash would block it -->
-  <script src="https://rjl.codes/error/404/custom404.js?v=RJL_1.3.0"></script>
+  <script src="https://rjl.codes/error/404/custom404.js?v=RJL_1.3.1"></script>
 </head>
 <body>
   <!-- Static fallback: only visible if the script is blocked or unreachable -->
@@ -164,7 +164,7 @@ Which images you host, how they are picked, and how they look.
 | `imgBoxShadowColor` | string | `"rgba(18, 0, 100, .4)"` | Color of the hover shadow. Use rgba() or an 8-digit hex to control opacity. Only used when imgBoxShadow is true. |
 | `maxImgWidth` | string | `"1000px"` | Maximum width of the image column. Applied as max-width on the image container. The image scales down inside it and never exceeds the column. |
 | `imgResponsiveBreakpoints` | boolean | `true` | Re-flow the layout on small screens. When true, a resize handler collapses left/right layouts to a single column at 768px and below and tightens the container padding at 480px and below. Font sizes and button padding always adapt through CSS regardless of this setting. |
-| `imgAlt` | string | `"404 Error"` | Alt text of the image. The alt attribute of the rendered image, for screen readers and for the text shown if the image cannot be displayed. *(new in 1.3.0)* |
+| `imgAlt` | string | `"404 Error"` | Alt text of the image. The alt attribute of the rendered image, for screen readers and for the text shown if the image cannot be displayed. |
 
 ### Button
 
@@ -178,7 +178,7 @@ The way home: a button or a plain link, its label and its destination.
 | `btnPulsateCount` | number | `2` | How many times the button pulses. Number of 2-second pulse cycles. 0 disables the animation even when btnPulsate is true. Must be 0 or greater. |
 | `btnDisplayText` | string | `"Back to"` | Button or link label. With btnDisplayHostName true the hostname is appended after a space, for example "Back to your-site.com". With autoText, leave it unset to receive a random label. |
 | `btnDisplayHostName` | boolean | `true` | Append the hostname to the label. Appends window.location.hostname to btnDisplayText. Overridden per render when autoText picks the label. |
-| `homeUrl` | string | `"/"` | Where the button, link and image point. The destination of the button, the plain link and the image link. Defaults to the site root; set it when your site lives in a subfolder or you want to send visitors somewhere more useful than the home page. *(new in 1.3.0)* |
+| `homeUrl` | string | `"/"` | Where the button, link and image point. The destination of the button, the plain link and the image link. Defaults to the site root; set it when your site lives in a subfolder or you want to send visitors somewhere more useful than the home page. |
 
 ### Header and text
 
