@@ -14,6 +14,7 @@ log and carries no version numbers, because none were assigned at the time.
 ### Changed
 
 - US English spelling sweep: 1 British spelling in 1 file(s) changed to US forms (`behaviour` -> `behavior`). Comments, docs and page copy only; no behavior change.
+- Version stamp: `custom404.js`, `custom404.min.js` and the README now say 1.3.1 (they still read 1.3.0; stamped 11-12-2026).
 
 ## [1.3.0] - 09-18-2026 at 5:58pm
 
